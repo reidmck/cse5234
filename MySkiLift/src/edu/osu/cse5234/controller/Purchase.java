@@ -1,17 +1,19 @@
 package edu.osu.cse5234.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 //import java.util.ArrayList;
 //import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import edu.osu.cse5234.business.view.Inventory;
+import edu.osu.cse5234.business.view.InventoryService;
+import edu.osu.cse5234.util.ServiceLocator;
 
 //this is the Purchase controller class
 
@@ -24,42 +26,14 @@ public class Purchase {
 	// display items for purchase
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewOrderEntryForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// ... instantiate and set order object with items to display
-
+		// empty order
 		Order order = new Order();
-		List<Item> items = new java.util.ArrayList<Item>();
-
-		Item item1 = new Item();
-		item1.setName("Atomic Nomad Blackeye Skis");
-		item1.setPrice("655");
-		items.add(item1);
-
-		Item item2 = new Item();
-		item2.setName("K2 Luv-IT 76 Skis");
-		item2.setPrice("350");
-		items.add(item2);
-
-		Item item3 = new Item();
-		item3.setName("Volkl XTD Skis");
-		item3.setPrice("255");
-		items.add(item3);
-
-		Item item4 = new Item();
-		item4.setName("Rossingnol Smash 7 Skis");
-		item4.setPrice("298");
-		items.add(item4);
-
-		Item item5 = new Item();
-		item5.setName("Atomic Affinity Storm Skis");
-		item5.setPrice("425");
-		items.add(item5);
-
-		// Item item = new Item();
-		// List<Item> myItems = liftTicketOrder.getItems();
-
-		order.setItems(items);
-
-		//request.setAttribute("order", liftTicketOrder);
+		// using util to locate remote service
+		InventoryService invServ = ServiceLocator.getInventoryService();
+		// remote serv provided , get the avail inventory
+		Inventory availableInventory = invServ.getAvailableInventory();
+		order.setItems(availableInventory.getItems());
+		
 		request.setAttribute("order", order);
 		// return the name of the jsp form
 		return "OrderEntryForm";

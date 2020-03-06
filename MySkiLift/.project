@@ -3,6 +3,7 @@
 	<name>MySkiLift</name>
 	<comment></comment>
 	<projects>
+		<project>MySkiLift-InventoryManagement-EJBClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
