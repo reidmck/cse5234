@@ -17,8 +17,8 @@
 		<tr>
 			<input type="hidden" name="item.name" value="${item.name}" />
 			<td><c:out value="${item.name}"></c:out></td>
-			<td><c:out value="${item.price}"></c:out></td>
-			<input type="hidden" name="items.get(${loop.index}).price" value="${item.price}" />
+			<td><c:out value="${item.unitPrice}"></c:out></td>
+			<input type="hidden" name="items.get(${loop.index}).price" value="${item.unitPrice}" />
 			<td><form:input path="items[${loop.index}].quantity" /></td>
 		</tr>
 	</c:forEach>

@@ -2,9 +2,10 @@ package edu.osu.cse5234.business;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import edu.osu.cse5234.controller.Order;
-import edu.osu.cse5234.util.ServiceLocator;
 
 /**
  * Session Bean implementation class OrderProcessingServiceBean
@@ -12,13 +13,16 @@ import edu.osu.cse5234.util.ServiceLocator;
 @Stateless
 @LocalBean
 public class OrderProcessingServiceBean {
-
+	@PersistenceContext	EntityManager entityManager;
 	public String processOrder(Order order) {
+		entityManager.persist(order);
+		entityManager.flush();
 		return null;
 	}
 
 	public boolean validateItemAvailability(Order order) {
-		return ServiceLocator.getInventoryService().validateQuantity(order.getItems());
+		return true;
+		//return ServiceLocator.getInventoryService().validateQuantity(order.getItems());
 	}
 
 }

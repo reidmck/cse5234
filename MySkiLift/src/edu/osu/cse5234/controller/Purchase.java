@@ -5,14 +5,13 @@ package edu.osu.cse5234.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
+import edu.osu.cse5234.util.ConversionUtil;
 import edu.osu.cse5234.util.ServiceLocator;
 
 //this is the Purchase controller class
@@ -32,7 +31,11 @@ public class Purchase {
 		InventoryService invServ = ServiceLocator.getInventoryService();
 		// remote serv provided , get the avail inventory
 		Inventory availableInventory = invServ.getAvailableInventory();
-		order.setItems(availableInventory.getItems());
+		//order.setItems(availableInventory.getItems());
+		// LineItem object for in/out of jsp
+		// we must convert
+		
+		order.setLineItems(ConversionUtil.convert(availableInventory.getItems()));
 		
 		request.setAttribute("order", order);
 		// return the name of the jsp form

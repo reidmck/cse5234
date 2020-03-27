@@ -6,6 +6,7 @@
 <%@ page import="edu.osu.cse5234.controller.Purchase"%>
 <%@ page import="edu.osu.cse5234.controller.Order"%>
 <%@ page import="edu.osu.cse5234.business.view.Item"%>
+<%@ page import="edu.osu.cse5234.model.LineItem"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <jsp:include page="header.jsp" />
@@ -36,16 +37,17 @@
 
 			response.getWriter().println("<br/><h2>Please Confirm Your Order:</h2><br/><br/>");
 			Order order = (Order) request.getSession().getAttribute("order");
-			List<edu.osu.cse5234.business.view.Item> items = order.getItems();
+			//List<edu.osu.cse5234.business.view.Item> items = order.getLineItems();
+			List<LineItem> items = order.getLineItems();
 			int totalAmount = 0;
 			 for (int i = 0; i < items.size(); i++) {
-		if (items.get(i).getQuantity() != null) { //looking at anything with quantity > 0 and not null 				
+		//if (items.get(i).getQuantity() != null) { //looking at anything with quantity > 0 and not null 				
 			//System.out.println(items.get(i).getPrice());
 			//totalAmount += 24 * 3;
 			// ** something is wrong here ** 
 			//totalAmount += Integer.parseInt(items.get(i).getPrice()) * Integer.parseInt(items.get(i).getQuantity());
-		}
-		response.getWriter().println("Item Name: " + items.get(i).getName() + ", Price per Item: "
+		//}
+		response.getWriter().println("Item Name: " + items.get(i).getItemName() + ", Price per Item: "
 			+ items.get(i).getPrice() + ", Quantity: " + items.get(i).getQuantity() + "<br />");
 			}
 	%>

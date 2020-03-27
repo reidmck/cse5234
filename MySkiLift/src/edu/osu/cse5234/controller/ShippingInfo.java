@@ -1,12 +1,47 @@
 package edu.osu.cse5234.controller;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SHIPPING_INFO")
+
 public class ShippingInfo {
-	 private String name;
-	 private String addressLine1;
-	 private String addressLine2;
-	 private String city;
-	 private String state;
-	 private String zip;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
+	private int id;
+	@Column(name="NAME")
+	private String name;
+	@Column(name="ADDRESS1")
+	private String addressLine1;
+	@Column(name="ADDRESS2")
+	private String addressLine2;
+	@Column(name="CITY")
+	private String city;
+	@Column(name="STATE")
+	private String state;
+	@Column(name="ZIP")
+	private String zip;
+	
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name="SHIPPING_INFO_ID_FK")
+	//private ShippingInfo shipment;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

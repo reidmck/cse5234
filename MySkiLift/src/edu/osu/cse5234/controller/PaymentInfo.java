@@ -1,12 +1,45 @@
 package edu.osu.cse5234.controller;
 //this is the PaymentInfo model class
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import edu.osu.cse5234.model.LineItem;
+
+@Entity
+@Table(name="PAYMENT_INFO")
+
 public class PaymentInfo implements java.io.Serializable{
-	private String ccnum; 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
+	private int id;
+	@Column(name="CCNUM")
+	private String ccnum;
+	@Column(name="EXPDT")
 	private String expdate;
+	@Column(name="CVVCODE")
 	private String cvvCode;
+	@Column(name="CHOLDER_NAME")
 	private String choldername;
-	
+		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private static final long serialVersionUID = 1L;
 	
 	public String getCcnum() {
